@@ -9,6 +9,7 @@ app.listen(8080,()=>console.log("Server is running on port 8080"));
 
 //Database Connection
 import mongoose from "mongoose"
+console.log("DB URL:", process.env.DB_URL);
 mongoose.connect(process.env.DB_URL).then(()=>{console.log("database connected !")})
 .catch(()=>{console.log("database not connected")});
 
