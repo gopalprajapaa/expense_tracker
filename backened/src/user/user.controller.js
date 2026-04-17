@@ -68,10 +68,9 @@ export const Login = async (req, res) => {
         const token = await createToken(user);
         res.cookie("authToken", token, {
             httpOnly: true,
-            secure: process.env.ENVIRONMENT !== "DEV",
-            sameSite: process.env.ENVIRONMENT === "DEV" ? "lax" : "none",
+            secure: true,        // ALWAYS true for Render
+            sameSite: "none",    // REQUIRED for frontend-backend
             path: "/",
-            domain: undefined,
             maxAge: 86400000,
         });
         res.json({ message: "Login Success", role: user.role });
@@ -85,15 +84,12 @@ export const Login = async (req, res) => {
 export const logout = async (req, res) => {
     try {
 
-        res.cookie('authToken', null, {
+        res.clearCookie("authToken", {
             httpOnly: true,
-            secure: process.env.ENVIRONMENT !== "DEV",
-            sameSite: process.env.ENVIRONMENT === "DEV" ? "lax" : "none",
+            secure: true,
+            sameSite: "none",
             path: "/",
-            domain: undefined,
-            maxAge: 0,
         });
-
         res.status(200).json({ message: "Logout Success" });
 
     } catch (err) {
