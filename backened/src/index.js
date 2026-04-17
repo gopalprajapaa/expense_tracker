@@ -15,9 +15,7 @@ console.log("DB URL:", process.env.DB_URL);
 mongoose.connect(process.env.DB_URL).then(()=>{console.log("database connected !")})
 .catch(()=>{console.log("database not connected")});
 
-import cookieParser from 'cookie-parser'
 app.use(cookieParser())
-import cors from "cors"
 
 // middlewares
 app.use(cookieParser());
