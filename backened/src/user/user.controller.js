@@ -85,13 +85,12 @@ export const Login = async (req, res) => {
 export const logout = async (req, res) => {
     try {
 
-        res.cookie('authToken', null, {
+        res.cookie("authToken", token, {
             httpOnly: true,
-            secure: process.env.ENVIRONMENT !== "DEV",
-            sameSite: process.env.ENVIRONMENT === "DEV" ? "lax" : "none",
+            secure: true,        // ALWAYS true in production (Render/HTTPS)
+            sameSite: "none",    // REQUIRED for cross-site frontend-backend
             path: "/",
-            domain: undefined,
-            maxAge: 0,
+            maxAge: 86400000,
         });
 
         res.status(200).json({ message: "Logout Success" });
