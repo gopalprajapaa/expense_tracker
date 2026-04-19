@@ -35,7 +35,7 @@ userRouter.get("/session",AdminUserGuard,(req,res)=>{
 //@post /api/user/forgot-password
 userRouter.post("/verify-token",verifyTokenGuard,verifyToken);
 
-//@post /api/user/forgot-password
+//@put /api/user/change-password
 userRouter.put("/change-password",verifyTokenGuard,changePassword);
 
 export default userRouter;
